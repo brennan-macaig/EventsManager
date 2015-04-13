@@ -83,7 +83,7 @@
                     $_SESSION['LoggedIn'] = 1;
          
                     echo "<div class='alert alert-success' role='alert'><p><strong>All good!</strong> Logging you in now... please wait.</div>";
-                    echo "<script> window.location.replace('/manager/')</script>";
+                    echo "<script> window.location.replace('/manager/index')</script>";
                 } 
                 else {
                     echo "<div class='alert alert-danger' role='alert'><p><strong>Uh oh.</strong> I can't log you in. Please, try re-typing your username and password. If you continue to see this message, contact the system administrator(s).</div>";   

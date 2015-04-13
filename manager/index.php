@@ -90,9 +90,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($content as $table-row): array_map('htmlentities', $table-row); ?>
+                            <?php foreach ($content as $tablerow): ?>
                             <tr>
-                                <td><?php echo implode('</td><td>', $table-row);?></td>
+                                <td><?php echo implode('</td><td>', $tablerow);?></td>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -101,6 +101,7 @@
                     <div class="alert alert-danger" role="alert">
                         <p><strong>I tried weally hard, but something went wrong D:</strong> Have you created any events yet? If you haven't please use the button above to do so! <strong>But I have created an event</strong> oh no ):. We're sorry, but either the server isn't responding or we've lost your data. Try refreshing, and if this error persists tell your web admin about error code <strong>MYSQL_NORESP:2</strong>. Sworry! </p> 
                     </div>
+                    <?php } ?>
                 </div>
             <hr>
             <footer>

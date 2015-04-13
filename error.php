@@ -32,7 +32,7 @@
                 <h2>Apparently, that was a bad request.</h2>
                 <p>Error code: 400_BAD_REQUEST</p>
                 <?php break;
-                        case: 401:
+                        case 401:
                             ?>
                 <h1>401 ☹</h1>
                 <h2>For whatever reason, something went terribly wrong.</h2>
@@ -63,7 +63,7 @@
                         break;
                     }
                         ?>
-                <a href="index">Go back to the login page.</a>
+                <a href="/index">Go back to the login page.</a>
                 <p>Alternatively, use the back arrow on your browser.</p>
             </div>
         </div>
