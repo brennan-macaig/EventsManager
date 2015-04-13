@@ -30,7 +30,7 @@
         <title>Login | Events Manager</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/loginstyle.css" rel="stylesheet">
-        <meta http-equiv="refresh" content="0;index.php">
+        <meta http-equiv="refresh" content="0;index">
     </head>
     <body>
         <div class="container">

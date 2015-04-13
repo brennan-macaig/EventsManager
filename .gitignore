@@ -1,0 +1,9 @@
+# Part of events manager
+# written by Brennan Macaig
+# Copyright (C) Events Manager Developers
+# Copyright under the MIT public license.
+
+base.php
+*.htaccess
+register.php
+base-sessions.php

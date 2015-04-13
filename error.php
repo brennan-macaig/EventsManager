@@ -59,6 +59,12 @@
                 <h2>For whatever reason, somethign went terribly wrong.</h2>
                 <h2>This error should be uncommon, and I don't really know what it is.</h2>
                 <p>Error code: 4XX_UNKNOWN</p>
+                <?php
+                        break;
+                    }
+                        ?>
+                <a href="index">Go back to the login page.</a>
+                <p>Alternatively, use the back arrow on your browser.</p>
             </div>
         </div>
     </body>
