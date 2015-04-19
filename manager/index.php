@@ -28,14 +28,9 @@
         <title>Home | Events Manager</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/loginstyle.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> 
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" media="screen" />
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-				<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-				<!--[if lt IE 9]>
-						<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-						<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-				<![endif]-->
-
     </head>
     <body>
        
@@ -52,31 +47,88 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Events Manager</a>
+                    <a class="navbar-brand" href="../manager/index">Events Manager</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="/logout.php">Logout</a></li>
+                        <li><a href="../logout">Logout</a></li>
+                        <li class="active"><a href="../account">Account</a></li>
+                        <li><a href="../license">License</a></li>
                     </ul>
                 </div><!--/.navbar-collapse -->
             </div>
         </nav>
         <div class="jumbotron">
+            <?php
+            switch ($_GET['success']) {
+                case "addEvent":
+                    ?>
+                    <div class="alert alert-success" role="alert">
+                        <p><strong>Hurrah!</strong> An event was successfully added to the database.</p>
+                    </div>
+                    <?php
+                    break;
+            }
+            switch ($_GET['failure']) {
+                case "addEvent":
+                    ?>
+                    <div class="alert alert-danger" role="alert">
+                        <p><strong>Oh noes!</strong> Something went terribly wrong, and we couldn't add your event to the database. Sorry about that. Error code: NO_INSERT1</p>
+                    </div>
+                    <?php break;
+            }
+        ?>
             <div class="container">
                 <h1>Event Manager</h1>
-                <p>Welcome to Events Manager. This is the "default page" of the site, or home page. Here you can see quick status about various events, timers until the next ones, and you can start the primary actions of the program. To start, simply select one of the functions below.</p>
+                <p><strong>Welcome to events manager!</strong> This is the launch page. From here, you can create a new event, or using the ones listed below repeat "session" of that event! Please note, that if this is your first time it is highly recommended that you follow the <a href="../help/start">first timers guide</a>. Otherwise, use these buttons to perform some administrative tasks that effect ALL events, or use the buttons below to run a new session of those events.</p>
+                <div class="btn-group" role="group" aria-label="Actions">
+                   <a class="btn btn-primary" role="button" href="addEvent">Create New Event</a>
+                    <div class="btn-group" role="group" aria-label="Print Dropdown">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            Print...
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Print Signups</a></li>
+                            <li><a href="#">Print Lists</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Add Dropdown">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdwon" aria-expanded="false">
+                            Add New...
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Student</a></li>
+                            <li><a href="#">Teacher</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Remove Dropdown">
+                    <button type="button" class="btn btn-danger dropdown-toggler" data-toggle="dropdown" aria-expanded="false">
+                        Remove...
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Student</a></li>
+                        <li><a href="#">Teacher</a></li>
+                    </ul>
+                </div>
+                </div>
+                
             </div>
         </div>
+            <!-- CONTENT CONTAINER -->
             <div class="container">
+            <hr>
                 <!-- Example row of columns -->
                 <div class="row">
-                    <table class="table table-striped">
+                    <table class="table table-striped table-bordered">
                         <?php
                             $query = "SELECT * FROM events";
                             $result = mysql_query($query);
                             $content = array();            
                 
-                            $num = mysql_num_rows($results);
+                            $num = mysql_num_rows($result);
                             if ($num > 0) {
                                 while($row = mysql_fetch_assoc($result)) {
                                     $content[$row['ID']] = $row;
@@ -86,20 +138,20 @@
                         ?>
                         <thead>
                             <tr>
-                                <th><?php echo implode('</th><th>', array_keys(current($content)));?></th>
+                                <th><?php echo implode('</th><th>', array_keys(current($content)));?></th><th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($content as $tablerow): ?>
                             <tr>
-                                <td><?php echo implode('</td><td>', $tablerow);?></td>
+                                <td><?php echo implode('</td><td>', $tablerow);?></td><td><div class="btn-group" role="group" aria-label="Actions"><a class="btn btn-primary" role="button" href="#">New Session</a><a class="btn btn-success" role="button" href="#">Continue Latest</a><a class="btn btn-warning" role="button" href="#">Settings</a><?php echo "<a class='btn btn-danger' role='button' href='/manager/delete?id=".$content['id']."'>Delete</a>"; ?>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
                     <? }  else { ?>
-                    <div class="alert alert-danger" role="alert">
-                        <p><strong>I tried weally hard, but something went wrong D:</strong> Have you created any events yet? If you haven't please use the button above to do so! <strong>But I have created an event</strong> oh no ):. We're sorry, but either the server isn't responding or we've lost your data. Try refreshing, and if this error persists tell your web admin about error code <strong>MYSQL_NORESP:2</strong>. Sworry! </p> 
+                    <div class="alert alert-warning" role="alert">
+                        <p><strong>Whoops.</strong> Looks like you have not created any events yet. You should do that, otherwise events will not appear here! If you have created event types and they are not displaying, please refer error code <strong>ERR_NO_EVENTS1</strong> to the system admin.</p> 
                     </div>
                     <?php } ?>
                 </div>

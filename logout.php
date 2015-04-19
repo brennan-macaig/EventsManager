@@ -6,7 +6,7 @@
      | |___ \ V /  __/ | | | |_\__ \ | |  | | (_| | | | | (_| | (_| |  __/ |   
      |_____| \_/ \___|_| |_|\__|___/ |_|  |_|\__,_|_| |_|\__,_|\__, |\___|_|   
                                                           |___/           
-    index.php written by Brennan Macaig                                                      
+    logout.php written by Brennan Macaig                                                      
     Copyright (C) 2015 Brennan Macaig and Sant Bani School
     Licensed under the MIT Open Source License
     

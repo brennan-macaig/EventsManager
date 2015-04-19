@@ -30,6 +30,7 @@
         <title>Login | Events Manager</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/loginstyle.css" rel="stylesheet">
+        <link href="css/hackie.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         
         
@@ -91,6 +92,9 @@
             }
                 ?>
         </div><!-- /.container -->
+        <div class="hackie-footer">
+            <p>&copy; Copyright 2015 Brennan Macaig and Sant Bani School. See <a href="../license">the license</a> for more information.</p>
+        </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="../../dist/js/bootstrap.min.js"></script>
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

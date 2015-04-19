@@ -1,0 +1,20 @@
+/*
+ *  _   _            _    _      
+ * | | | | __ _  ___| | _(_) ___ 
+ * | |_| |/ _` |/ __| |/ / |/ _ \
+ * |  _  | (_| | (__|   <| |  __/
+ * |_| |_|\__,_|\___|_|\_\_|\___|
+ * 
+ * A CSS Library for the hacker in you.
+ * Copyright (C) 2014-15 Brennan Macaig and Sant Bani School.
+ * Protected by the MIT Public License.
+ */
+
+/* hackable footer */
+.hackie-footer {
+    width: 100%;
+    height: 25px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
