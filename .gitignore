@@ -7,3 +7,7 @@ base.php
 *.htaccess
 register.php
 base-sessions.php
+
+# Remove cached files, auto-save system with Brackets/Linux is awful, so get rid of those.
+*.php~
+*.*~
