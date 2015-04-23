@@ -65,11 +65,11 @@
             </div>
         </div>
            <?php
-    		if (isset($_POST['register']) && isset($_POST['name_ex']) && isset($_POST['blocks'])) {
+    		if (isset($_POST['register']) && isset($_POST['name_ex']) && isset($_POST['lastname'])) {
         		$name = mysql_real_escape_string($_POST['name_ex']);
-        		$blocks = mysql_real_escape_string($_POST['blocks']);
+        		$lastname = mysql_real_escape_string($_POST['lastname']);
 
-        		$registerQuery = mysql_query("INSERT INTO events (Name, Blocks) VALUES ('".$name."', '".$blocks."')");
+        		$registerQuery = mysql_query("INSERT INTO events (firstName, lastName) VALUES ('".$name."', '".$blocks."')");
 
         		if ($registerQuery) {
         		    echo "<script> window.location.replace('/manager/index?success=addEvent')</script>";

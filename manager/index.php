@@ -93,16 +93,16 @@
                             <li><a href="#">Print Lists</a></li>
                         </ul>
                     </div>
-                    <div class="btn-group" role="group" aria-label="Add Dropdown">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdwon" aria-expanded="false">
-                            Add New...
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Student</a></li>
-                            <li><a href="#">Teacher</a></li>
-                        </ul>
-                    </div>
+                     <div class="btn-group" role="group" aria-label="Remove Dropdown">
+                    <button type="button" class="btn btn-primary dropdown-toggler" data-toggle="dropdown" aria-expanded="false">
+                        Remove...
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Student</a></li>
+                        <li><a href="#">Teacher</a></li>
+                    </ul>
+                </div>
                     <div class="btn-group" role="group" aria-label="Remove Dropdown">
                     <button type="button" class="btn btn-danger dropdown-toggler" data-toggle="dropdown" aria-expanded="false">
                         Remove...
@@ -144,7 +144,8 @@
                         <tbody>
                             <?php foreach ($content as $tablerow): ?>
                             <tr>
-                                <td><?php echo implode('</td><td>', $tablerow);?></td><td><div class="btn-group" role="group" aria-label="Actions"><a class="btn btn-primary" role="button" href="#">New Session</a><a class="btn btn-success" role="button" href="#">Continue Latest</a><a class="btn btn-warning" role="button" href="#">Settings</a><?php echo "<a class='btn btn-danger' role='button' href='/manager/delete?id=".$content['id']."'>Delete</a>"; ?>
+                                <td><?php echo implode('</td><td>', $tablerow);?>
+                                </td><td><div class="btn-group" role="group" aria-label="Actions"><a class="btn btn-primary" role="button" href="#">New Session</a><a class="btn btn-success" role="button" href="#">Continue Latest</a><a class="btn btn-warning" role="button" href="#">Settings</a><?php echo "<a class='btn btn-danger' role='button' href='/manager/delete?id=".$tablerow['ID']."'>Delete</a>"; ?>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>

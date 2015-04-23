@@ -6,7 +6,7 @@
      | |___ \ V /  __/ | | | |_\__ \ | |  | | (_| | | | | (_| | (_| |  __/ |   
      |_____| \_/ \___|_| |_|\__|___/ |_|  |_|\__,_|_| |_|\__,_|\__, |\___|_|   
                                                           |___/           
-    addEvent.php written by Brennan Macaig                                                      
+    delete.php written by Brennan Macaig                                                      
     Copyright (C) 2015 Brennan Macaig and Sant Bani School
     Licensed under the MIT Open Source License
     
@@ -61,51 +61,20 @@
         <div class="jumbotron">
             <div class="container">
                 <h1>Event Manager</h1>
-                <p><strong>Create a new event.</strong> Welcome to the events creator! Please fill out the basic form below, and I'll automatically handle the rest for you! If you need help, please see our <a href="../help?page=create">documentation</a> on the subject.</p>
+                <p><strong>Deleting</strong> Please wait...</p>
+                <?php
+                    $id = ($_GET['id']);
+                    $query = "DELETE FROM events WHERE ID=".$id."";
+                    $result = mysql_query($query);
+                    if ($result) {
+                        echo "<script> window.location.replace('/manager/index?success=deleteEvent')</script>";
+                    } else {
+                        echo "<script> window.location.replace('/manager/index?failure=deleteEvent')</script>";
+                    }
+                ?>
             </div>
         </div>
-           <?php
-    		if (isset($_POST['register']) && isset($_POST['name_ex']) && isset($_POST['blocks'])) {
-        		$name = mysql_real_escape_string($_POST['name_ex']);
-        		$blocks = mysql_real_escape_string($_POST['blocks']);
-
-        		$registerQuery = mysql_query("INSERT INTO events (Name, Blocks) VALUES ('".$name."', '".$blocks."')");
-
-        		if ($registerQuery) {
-        		    echo "<script> window.location.replace('/manager/index?success=addEvent')</script>";
-        		} else {
-        		    echo "<script> window.location.replace('/manager/index?failure=addEvent')</script>";
-        		}
-    		} else {
-
-?>
-    	<!-- CONTENT CONTAINER -->
-    	<div class="container">
-    		<form method="post" action="/manager/addEvent.php" name="registerform" id="registerform">
-        		<div class="form-group">
-        		    <label for="name">Event Name</label>
-            		    <input type="text" class="form-controll" id="name_ex"  name= "name_ex" placeholder="e.g. artblocks">
-        		</div>
-        	        <div class="form-group" name="blocks" id="blocks">
-        	        <label for="names">Blocks</label>
-        		    <select class="form-control" for="blocks" name="blocks" >
-                	    <option value="1">1</option>
-               		    <option value="2">2</option>
-             		    <option value="3">3</option>
-             		    <option value="4">4</option>
-            		    <option value="5">5</option>
-            		    <option value="6">6</option>
-            		    <option value="7">7</option>
-            		    <option value="8">8</option>
-            		    </select>
-        		</div>
-        		<div class="form-group">
-            		    <input type="submit" name="register" id="register" class="btn btn-default" value="Submit" />
-        		</div>
-    		</form>
-    	</div>
-	<?php } ?>
-            <hr>
+    <hr>
             <footer>
                 <p>&copy; Copyright Brennan Macaig and Sant Bani School 2015. See <a href="/license.php">the license</a> for more info.</p>    
             </footer>
