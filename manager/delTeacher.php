@@ -6,7 +6,7 @@
      | |___ \ V /  __/ | | | |_\__ \ | |  | | (_| | | | | (_| | (_| |  __/ |   
      |_____| \_/ \___|_| |_|\__|___/ |_|  |_|\__,_|_| |_|\__,_|\__, |\___|_|   
                                                           |___/           
-    addTeacher.php written by Brennan Macaig                                                      
+    delTeacher.php written by Brennan Macaig                                                      
     Copyright (C) 2015 Brennan Macaig and Sant Bani School
     Licensed under the MIT Open Source License
     
@@ -25,7 +25,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- OTHER TAGS -->
 
-        <title>Home | Events Manager</title>
+        <title>Removing Teacher... | Events Manager</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/loginstyle.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> 
@@ -61,62 +61,20 @@
         <div class="jumbotron">
             <div class="container">
                 <h1>Event Manager</h1>
-                <p><strong>Add a teacher to the database.</strong> From here you can add any teacher you want into the system.</p>
+                <p><strong>Deleting</strong> Please wait...</p>
+                <?php
+                    $id = ($_GET['id']);
+                    $query = "DELETE FROM teachers WHERE ID=".$id."";
+                    $result = mysql_query($query);
+                    if ($result) {
+                        echo "<script> window.location.replace('/manager/index?success=delTeacher')</script>";
+                    } else {
+                        echo "<script> window.location.replace('/manager/index?failure=delTeacher')</script>";
+                    }
+                ?>
             </div>
         </div>
-           <?php
-    		if (isset($_POST['register']) && isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['email'])) {
-        		$name = mysql_real_escape_string($_POST['firstName']);
-        		$lastname = mysql_real_escape_string($_POST['lastName']);
-                $email = mysql_real_escape_string($_POST['email']);
-
-        		$registerQuery = mysql_query("INSERT INTO teachers (firstName, lastName, Email) VALUES ('".$name."', '".$lastname."', '".$email."')");
-
-        		if ($registerQuery) {
-        		    echo "<script> window.location.replace('../manager/index?success=addTeacher')</script>";
-        		} else {
-        		    echo "<script> window.location.replace('../manager/index?failure=addTeacher')</script>";
-        		}
-    		} else {
-
-?>
-    	<!-- CONTENT CONTAINER -->
-    	<div class="container">
-    		<form method="post" action="/manager/addTeacher.php" name="registerform" id="registerform">
-        		<div class="form-group">
-                   <script type="text/javascript">
-                    $(function(){
-                        var list = ['Tim', 'Emma','Bob', 'Sarah', 'Billy', 'Charlotte', 'Oliver', 'Abigal', 'Benjamin', 'Violet'],
-                        r = Math.floor(Math.random() * list.length);
-                        $('#firstName').prop('placeholder',list[r]);
-                    });
-                    </script>
-        		    <label for="name">First Name</label>
-            		    <input type="text" class="form-controll" id="firstName"  name= "firstName" placeholder="">
-        		</div>
-                   <script type="text/javascript">
-                    $(function(){
-                        var list = ['Lockwood', 'Smith', 'Johnson', 'Clark', 'Williams', 'Peterson', 'Thompson', 'Brown', 'Robinson', 'Walker'],
-                        r = Math.floor(Math.random() * list.length);
-                        $('#lastName').prop('placeholder',list[r]);
-                    });
-                    </script>
-        	        <div class="form-group" name="blocks" id="blocks">
-        	        <label for="names">Last Name</label>
-        	        <input type="text" class="form-controll" id="lastName" name="lastName" placeholder="">
-        		</div>
-        		
-        		<div class="form-group" name="someName" id="someName">
-        		    <label for="names">Email</label>
-                    <input type="email" class="form-controll" id="email" name="email" placeholder="jon.doe@santbani.org">
-        		</div>
-        		<div class="form-group">
-            		    <input type="submit" name="register" id="register" class="btn btn-default" value="Submit" />
-        		</div>
-    		</form>
-    	</div>
-	<?php } ?>
-            <hr>
+    <hr>
             <footer>
                 <p>&copy; Copyright Brennan Macaig and Sant Bani School 2015. See <a href="/license.php">the license</a> for more info.</p>    
             </footer>

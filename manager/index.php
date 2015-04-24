@@ -63,17 +63,64 @@
             switch ($_GET['success']) {
                 case "addEvent":
                     ?>
-                    <div class="alert alert-success" role="alert">
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <p><strong>Hurrah!</strong> An event was successfully added to the database.</p>
                     </div>
                     <?php
                     break;
+                case "addTeacher":
+                    ?><div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <p><strong>Yay!</strong> We were able to add that teacher to our database. Hurray!</p>
+                    </div>
+                    <?php
+                    break;
+                case "deleteEvent":
+                    ?>
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <p><strong>Woo-Hoo!</strong> Event was successfully deleted from the database. You're welcome!</p>
+                    </div>
+                    <?php
+                    break;
+                case "delTeacher":
+                    ?>
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span arai-hidden="true">&times;</span></button>
+                        <p><strong>Boo-yah!</strong> We successfully removed that teacher from the database.</p>
+                    </div>
+                    <?php break;
             }
             switch ($_GET['failure']) {
                 case "addEvent":
                     ?>
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <p><strong>Oh noes!</strong> Something went terribly wrong, and we couldn't add your event to the database. Sorry about that. Error code: NO_INSERT1</p>
+                    </div>
+                    <?php break;
+                case "addTeacher":
+                    ?>
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <p><strong>Darn!</strong> We couldn't add the teacher to the database. I tried weally hard, but I don't think it worked.</p>
+                    </div>-
+                    <?php
+                    break;
+                case "deleteEvent":
+                    ?>
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <p><strong>Fiddlesticks!</strong> I couldn't delete the event from the database. I don't really know why.</p>
+                    </div>
+                    <?php
+                    break;
+                case "delTeacher":
+                    ?>
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span arai-hidden="true">&times;</span></button>
+                        <p><strong>Oh snap!</strong> For whatever reason I can't remove that teacher from the database. Oh well....</p>
                     </div>
                     <?php break;
             }
@@ -82,9 +129,18 @@
                 <h1>Event Manager</h1>
                 <p><strong>Welcome to events manager!</strong> This is the launch page. From here, you can create a new event, or using the ones listed below repeat "session" of that event! Please note, that if this is your first time it is highly recommended that you follow the <a href="../help/start">first timers guide</a>. Otherwise, use these buttons to perform some administrative tasks that effect ALL events, or use the buttons below to run a new session of those events.</p>
                 <div class="btn-group" role="group" aria-label="Actions">
-                   <a class="btn btn-primary" role="button" href="addEvent">Create New Event</a>
-                    <div class="btn-group" role="group" aria-label="Print Dropdown">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                   <a class="btn btn-success" role="button" href="addEvent">Create New Event</a>
+                        <div class="btn-group" role="group" aria-label="list dropdown">
+                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                List...
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="../manager/listTeacher">Teachers</a></li>
+                            </ul>
+                        </div>
+                       <div class="btn-group" role="group" aria-label="Print Dropdown">
+                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             Print...
                             <span class="caret"></span>
                         </button>
@@ -93,26 +149,16 @@
                             <li><a href="#">Print Lists</a></li>
                         </ul>
                     </div>
-                     <div class="btn-group" role="group" aria-label="Remove Dropdown">
-                    <button type="button" class="btn btn-primary dropdown-toggler" data-toggle="dropdown" aria-expanded="false">
-                        Remove...
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Student</a></li>
-                        <li><a href="#">Teacher</a></li>
-                    </ul>
-                </div>
-                    <div class="btn-group" role="group" aria-label="Remove Dropdown">
-                    <button type="button" class="btn btn-danger dropdown-toggler" data-toggle="dropdown" aria-expanded="false">
-                        Remove...
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Student</a></li>
-                        <li><a href="#">Teacher</a></li>
-                    </ul>
-                </div>
+                    <div class="btn-group" role="group" aria-label="Add Stuff">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            Add...
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Student</a></li>
+                            <li><a href="../manager/addTeacher">Teacher</a></li>
+                        </ul>
+                    </div>
                 </div>
                 
             </div>
@@ -135,6 +181,7 @@
                                 }
                             }
                             if ($num > 0) {
+                                
                         ?>
                         <thead>
                             <tr>
@@ -145,14 +192,19 @@
                             <?php foreach ($content as $tablerow): ?>
                             <tr>
                                 <td><?php echo implode('</td><td>', $tablerow);?>
-                                </td><td><div class="btn-group" role="group" aria-label="Actions"><a class="btn btn-primary" role="button" href="#">New Session</a><a class="btn btn-success" role="button" href="#">Continue Latest</a><a class="btn btn-warning" role="button" href="#">Settings</a><?php echo "<a class='btn btn-danger' role='button' href='/manager/delete?id=".$tablerow['ID']."'>Delete</a>"; ?>
+                                </td><td><div class="btn-group" role="group" aria-label="Actions"><a class="btn btn-primary" role="button" href="#">New Session</a><a class="btn btn-success" role="button" href="#">Continue Latest</a><a class="btn btn-warning" role="button" href="#">Settings</a><?php 
+                                echo "<button type='button' class='btn btn-danger' data-toggle='modal' data-target='#mdlid".$tablerow['ID']."'>Delete</button><div class='modal fade' id='mdlid".$tablerow['ID']."' tabindex='-1' role='dialog' aria-labelledby='Delete Modal' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button><h4 class='modal-title' id='modalLabel'>Are you sure?</h4></div><div class='modal-body'><p><strong>Are you sure?</strong> By pressing \"DELETE\" below you understand that there are risks to what you're about to do. Things may unexpectedly break and data may be lost. <strong>This is not able to be undone</strong>. Please proceede with caution.</p></div><div class='modal-footer'><button type='button' class='btn btn-success' data-dismiss='modal'>Return to Safety</button><a class='btn btn-danger' role='button' href='../manager/delete?id=".$tablerow['ID']."'>I understand the risks, continue anyways.</a></div></div></div></div>";
+                                ?>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
                     <? }  else { ?>
-                    <div class="alert alert-warning" role="alert">
-                        <p><strong>Whoops.</strong> Looks like you have not created any events yet. You should do that, otherwise events will not appear here! If you have created event types and they are not displaying, please refer error code <strong>ERR_NO_EVENTS1</strong> to the system admin.</p> 
+                    <div class="alert alert-info" role="alert">
+                        <p><strong>Whoops.</strong> Looks like you have not created any events yet. You should do that, otherwise events will not appear here!</p> 
+                    </div>
+                    <div class="alert alert-danger" role="alert">
+                        <p><strong>Did I make a mistake?</strong> Have you added stuff to the database already? If you have, please use <a href="../report?err=missingEvent">this link</a> to report an error to the system administrators.</p>
                     </div>
                     <?php } ?>
                 </div>
