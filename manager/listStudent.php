@@ -6,7 +6,7 @@
      | |___ \ V /  __/ | | | |_\__ \ | |  | | (_| | | | | (_| | (_| |  __/ |   
      |_____| \_/ \___|_| |_|\__|___/ |_|  |_|\__,_|_| |_|\__,_|\__, |\___|_|   
                                                           |___/           
-    listTeacher.php written by Brennan Macaig                                                      
+    listStudent.php written by Brennan Macaig                                                      
     Copyright (C) 2015 Brennan Macaig and Sant Bani School
     Licensed under the MIT Open Source License
     
@@ -70,7 +70,7 @@
                 <div class="row">
                     <table class="table table-striped table-bordered">
                         <?php
-                            $query = "SELECT * FROM teachers";
+                            $query = "SELECT * FROM students";
                             $result = mysql_query($query);
                             $content = array();            
                 
@@ -91,7 +91,7 @@
                             <?php foreach ($content as $tablerow): ?>
                             <tr>
                                 <td><?php echo implode('</td><td>', $tablerow);
-                                echo "</td><td><button type='button' class='btn btn-danger' data-toggle='modal' data-target='#mdlid".$tablerow['ID']."'>Delete</button><div class='modal fade' id='mdlid".$tablerow['ID']."' tabindex='-1' role='dialog' aria-labelledby='Delete Modal' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button><h4 class='modal-title' id='modalLabel'>Are you sure?</h4></div><div class='modal-body'><p><strong>Are you sure?</strong> By pressing \"DELETE\" below you understand that there are risks to what you're about to do. things may unexpectedly break and data may be lost. <strong>This is not able to be undone</strong>. Please proceede with caution.</p><p><strong>PLEASE NOTE:</strong> any event that contains this teacher will NOT work any more. Do NOT delete teachers unless you have a VERY GOOD reason.</p></div><div class='modal-footer'><button type='button' class='btn btn-success' data-dismiss='modal'>Return to Safety</button><a class='btn btn-danger' role='button' href='../manager/delTeacher?id=".$tablerow['ID']."'>I understand the risks, continue anyways.</a></div></div></div></div></td>";?>
+                                echo "</td><td><button type='button' class='btn btn-danger' data-toggle='modal' data-target='#mdlid".$tablerow['ID']."'>Delete</button><div class='modal fade' id='mdlid".$tablerow['ID']."' tabindex='-1' role='dialog' aria-labelledby='Delete Modal' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button><h4 class='modal-title' id='modalLabel'>Are you sure?</h4></div><div class='modal-body'><p><strong>Are you sure?</strong> By pressing \"DELETE\" below you understand that there are risks to what you're about to do. things may unexpectedly break and data may be lost. <strong>This is not able to be undone</strong>. Please proceede with caution.</p><p><strong>PLEASE NOTE:</strong> any event that contains this teacher will NOT work any more. Do NOT delete teachers unless you have a VERY GOOD reason.</p></div><div class='modal-footer'><button type='button' class='btn btn-success' data-dismiss='modal'>Return to Safety</button><a class='btn btn-danger' role='button' href='../manager/delStudent?id=".$tablerow['ID']."'>I understand the risks, continue anyways.</a></div></div></div></div></td>";?>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>
