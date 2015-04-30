@@ -87,8 +87,22 @@
                 case "delTeacher":
                     ?>
                     <div class="alert alert-success alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span arai-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <p><strong>Boo-yah!</strong> We successfully removed that teacher from the database.</p>
+                    </div>
+                    <?php break;
+                case "addStudent":
+                    ?>
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <p><strong>Woot-Woot!</strong> We've added a student to the database without a hitch.</p>
+                    </div>
+                    <?php break;
+                case "delStudent":
+                    ?>
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <p><strong>Hip-hip... Hurrah!</strong> That student was removed from the database without a problem.</p>
                     </div>
                     <?php break;
             }
@@ -123,6 +137,20 @@
                         <p><strong>Oh snap!</strong> For whatever reason I can't remove that teacher from the database. Oh well....</p>
                     </div>
                     <?php break;
+                case "delStudent":
+                    ?>
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span arai-hidden="true">&times;</span></button>
+                         <p><strong>Gosh darn!</strong> We couldn't delete that student from the system. Too bad.</p>
+                    </div>
+                    <?php break;
+                case "addStudent":
+                    ?>
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span arai-hidden="true">&times;</span></button>
+                         <p><strong>Do you want the bad news first?</strong> Sure you do. We couldn't add a student to the database. That's kind of sad, actually.</p>
+                    </div>
+                    <?php
             }
         ?>
             <div class="container">
@@ -137,6 +165,7 @@
                             </button>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="../manager/listTeacher">Teachers</a></li>
+                                <li><a href="../manager/listStudent">Students</a></li>
                             </ul>
                         </div>
                        <div class="btn-group" role="group" aria-label="Print Dropdown">
@@ -155,7 +184,7 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Student</a></li>
+                            <li><a href="../manager/addStudent">Student</a></li>
                             <li><a href="../manager/addTeacher">Teacher</a></li>
                         </ul>
                     </div>
@@ -192,7 +221,10 @@
                             <?php foreach ($content as $tablerow): ?>
                             <tr>
                                 <td><?php echo implode('</td><td>', $tablerow);?>
-                                </td><td><div class="btn-group" role="group" aria-label="Actions"><a class="btn btn-primary" role="button" href="#">New Session</a><a class="btn btn-success" role="button" href="#">Continue Latest</a><a class="btn btn-warning" role="button" href="#">Settings</a><?php 
+                                </td><td><div class="btn-group" role="group" aria-label="Actions"><?php
+                                echo "<a class='btn btn-primary' role='button' href='../manager/newSession?id=".$tablerow['ID']."'>New Session</a>";
+                                echo "<a class='btn btn-success' role='button' href='../manager/continueLatest?id=".$tablerow['ID']."'>Continue Latest</a>";
+                                echo "<a class='btn btn-success' role='button' href='../manager/modEventSettings?id=".$tablerow['ID']."'>Settings</a>";
                                 echo "<button type='button' class='btn btn-danger' data-toggle='modal' data-target='#mdlid".$tablerow['ID']."'>Delete</button><div class='modal fade' id='mdlid".$tablerow['ID']."' tabindex='-1' role='dialog' aria-labelledby='Delete Modal' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button><h4 class='modal-title' id='modalLabel'>Are you sure?</h4></div><div class='modal-body'><p><strong>Are you sure?</strong> By pressing \"DELETE\" below you understand that there are risks to what you're about to do. Things may unexpectedly break and data may be lost. <strong>This is not able to be undone</strong>. Please proceede with caution.</p></div><div class='modal-footer'><button type='button' class='btn btn-success' data-dismiss='modal'>Return to Safety</button><a class='btn btn-danger' role='button' href='../manager/delete?id=".$tablerow['ID']."'>I understand the risks, continue anyways.</a></div></div></div></div>";
                                 ?>
                             </tr>
@@ -202,9 +234,6 @@
                     <? }  else { ?>
                     <div class="alert alert-info" role="alert">
                         <p><strong>Whoops.</strong> Looks like you have not created any events yet. You should do that, otherwise events will not appear here!</p> 
-                    </div>
-                    <div class="alert alert-danger" role="alert">
-                        <p><strong>Did I make a mistake?</strong> Have you added stuff to the database already? If you have, please use <a href="../report?err=missingEvent">this link</a> to report an error to the system administrators.</p>
                     </div>
                     <?php } ?>
                 </div>

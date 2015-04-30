@@ -25,7 +25,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- OTHER TAGS -->
 
-        <title>Teachers | Events Manager</title>
+        <title>Students | Events Manager</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/loginstyle.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> 
@@ -61,7 +61,7 @@
         <div class="jumbotron">
             <div class="container">
                 <h1>Event Manager</h1>
-                <p><strong>Listing teachers.</strong> See below so that I can fetch you a list of teachers that have been added to our system.</p>
+                <p><strong>Listing Students.</strong> See below so that I can fetch you a list of students that have been added to our system.</p>
             </div>
         </div>
          <div class="container">
@@ -91,17 +91,14 @@
                             <?php foreach ($content as $tablerow): ?>
                             <tr>
                                 <td><?php echo implode('</td><td>', $tablerow);
-                                echo "</td><td><button type='button' class='btn btn-danger' data-toggle='modal' data-target='#mdlid".$tablerow['ID']."'>Delete</button><div class='modal fade' id='mdlid".$tablerow['ID']."' tabindex='-1' role='dialog' aria-labelledby='Delete Modal' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button><h4 class='modal-title' id='modalLabel'>Are you sure?</h4></div><div class='modal-body'><p><strong>Are you sure?</strong> By pressing \"DELETE\" below you understand that there are risks to what you're about to do. things may unexpectedly break and data may be lost. <strong>This is not able to be undone</strong>. Please proceede with caution.</p><p><strong>PLEASE NOTE:</strong> any event that contains this teacher will NOT work any more. Do NOT delete teachers unless you have a VERY GOOD reason.</p></div><div class='modal-footer'><button type='button' class='btn btn-success' data-dismiss='modal'>Return to Safety</button><a class='btn btn-danger' role='button' href='../manager/delStudent?id=".$tablerow['ID']."'>I understand the risks, continue anyways.</a></div></div></div></div></td>";?>
+                                echo "</td><td><button type='button' class='btn btn-danger' data-toggle='modal' data-target='#mdlid".$tablerow['ID']."'>Delete</button><div class='modal fade' id='mdlid".$tablerow['ID']."' tabindex='-1' role='dialog' aria-labelledby='Delete Modal' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button><h4 class='modal-title' id='modalLabel'>Are you sure?</h4></div><div class='modal-body'><p><strong>Are you sure?</strong> By pressing \"DELETE\" below you understand that there are risks to what you're about to do. things may unexpectedly break and data may be lost. <strong>This is not able to be undone</strong>. Please proceede with caution.</p><p><strong>PLEASE NOTE:</strong> any event that contains this student will NOT work any more. Do NOT delete teachers unless you have a VERY GOOD reason.</p></div><div class='modal-footer'><button type='button' class='btn btn-success' data-dismiss='modal'>Return to Safety</button><a class='btn btn-danger' role='button' href='../manager/delStudent?id=".$tablerow['ID']."'>I understand the risks, continue anyways.</a></div></div></div></div></td>";?>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
                     <? }  else { ?>
                     <div class="alert alert-info" role="alert">
-                        <p><strong>Uhh... Huston?</strong> Maybe you haven't added any teachers yet! You should go do that if you want to be able to see anything here.<p> 
-                    </div>
-                    <div class="alert alert-danger" role="alert">
-                        <p><strong>Did I make a mistake?</strong> Have you added stuff to the database already? If you have, please use <a href="../report?err=missingTeach">this link</a> to report an error to the system administrators.</p>
+                        <p><strong>Woof!</strong> There might have been an error. It looks like you haven't added any students yet silly!</p> 
                     </div>
                     <?php } ?>
                 </div>
