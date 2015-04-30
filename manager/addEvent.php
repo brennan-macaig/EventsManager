@@ -70,7 +70,7 @@
         		$blocks = mysql_real_escape_string($_POST['blocks']);
 
         		$registerQuery = mysql_query("INSERT INTO events (Name, Blocks) VALUES ('".$name."', '".$blocks."')");
-
+                
         		if ($registerQuery) {
         		    echo "<script> window.location.replace('/manager/index?success=addEvent')</script>";
         		} else {

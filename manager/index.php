@@ -154,12 +154,12 @@
             }
         ?>
             <div class="container">
-                <h1>Event Manager</h1>
+                <h1>Events Manager</h1>
                 <p><strong>Welcome to events manager!</strong> This is the launch page. From here, you can create a new event, or using the ones listed below repeat "session" of that event! Please note, that if this is your first time it is highly recommended that you follow the <a href="../help/start">first timers guide</a>. Otherwise, use these buttons to perform some administrative tasks that effect ALL events, or use the buttons below to run a new session of those events.</p>
                 <div class="btn-group" role="group" aria-label="Actions">
-                   <a class="btn btn-success" role="button" href="addEvent">Create New Event</a>
+                   <a class="btn btn-primary" role="button" href="addEvent">Create New Event</a>
                         <div class="btn-group" role="group" aria-label="list dropdown">
-                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                 List...
                                 <span class="caret"></span>
                             </button>
@@ -169,7 +169,7 @@
                             </ul>
                         </div>
                        <div class="btn-group" role="group" aria-label="Print Dropdown">
-                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             Print...
                             <span class="caret"></span>
                         </button>
@@ -179,7 +179,7 @@
                         </ul>
                     </div>
                     <div class="btn-group" role="group" aria-label="Add Stuff">
-                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             Add...
                             <span class="caret"></span>
                         </button>
@@ -222,9 +222,9 @@
                             <tr>
                                 <td><?php echo implode('</td><td>', $tablerow);?>
                                 </td><td><div class="btn-group" role="group" aria-label="Actions"><?php
-                                echo "<a class='btn btn-primary' role='button' href='../manager/newSession?id=".$tablerow['ID']."'>New Session</a>";
-                                echo "<a class='btn btn-success' role='button' href='../manager/continueLatest?id=".$tablerow['ID']."'>Continue Latest</a>";
-                                echo "<a class='btn btn-success' role='button' href='../manager/modEventSettings?id=".$tablerow['ID']."'>Settings</a>";
+                                echo "<a class='btn btn-success' role='button' href='../manager/continueWorking?id=".$tablerow['ID']."'>New Session</a>";
+                                echo "<a class='btn btn-success' role='button' href='../manager/continueWorking?id=".$tablerow['ID']."'>Continue Working</a>";
+                                echo "<a class='btn btn-warning' role='button' href='../manager/modEventSettings?id=".$tablerow['ID']."'>Settings</a>";
                                 echo "<button type='button' class='btn btn-danger' data-toggle='modal' data-target='#mdlid".$tablerow['ID']."'>Delete</button><div class='modal fade' id='mdlid".$tablerow['ID']."' tabindex='-1' role='dialog' aria-labelledby='Delete Modal' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button><h4 class='modal-title' id='modalLabel'>Are you sure?</h4></div><div class='modal-body'><p><strong>Are you sure?</strong> By pressing \"DELETE\" below you understand that there are risks to what you're about to do. Things may unexpectedly break and data may be lost. <strong>This is not able to be undone</strong>. Please proceede with caution.</p></div><div class='modal-footer'><button type='button' class='btn btn-success' data-dismiss='modal'>Return to Safety</button><a class='btn btn-danger' role='button' href='../manager/delete?id=".$tablerow['ID']."'>I understand the risks, continue anyways.</a></div></div></div></div>";
                                 ?>
                             </tr>
@@ -239,7 +239,11 @@
                 </div>
             <hr>
             <footer>
-                <p>&copy; Copyright Brennan Macaig and Sant Bani School 2015. See <a href="/license.php">the license</a> for more info.</p>    
+               <div style="display:table-cell;vertical-align:bottom;">
+                  <div style="margin-left:auto;margin-right:auto;">
+                        <p>&copy; Copyright Brennan Macaig and Sant Bani School 2015. See <a href="/license.php">the license</a> for more info.</p>    
+                   </div>
+                </div>
             </footer>
         </div>
     <?php

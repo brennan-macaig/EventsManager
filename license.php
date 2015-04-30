@@ -37,13 +37,12 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="../manager/index">Events Manager</a>
+                        <a class="navbar-brand" href="/manager/index">Events Manager</a>
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li><a href="../logout">Logout</a></li>
+                            <li><a href="logout">Logout</a></li>
                             <li class="active"><a href="../account">Account</a></li>
-                            <li><a href="../license">License</a></li>
                         </ul>
                     </div><!--/.navbar-collapse -->
                 </div>

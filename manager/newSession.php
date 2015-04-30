@@ -25,7 +25,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- OTHER TAGS -->
 
-        <title>Home | Events Manager</title>
+        <title>New Session | Events Manager</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/loginstyle.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> 
@@ -79,107 +79,86 @@
                 Please fill in this information correclty and accurately. You CANNOT change this information without starting over.
             </p>
             <?php
-            if (isset($_POST['gradeMin']) && isset($_POST['gradeMax']) && isset($_POST['date']) && isset($_POST['chckbx1']) && isset($_POST['chckbx2']) && isset($_POST['note'])) {
-        		$gradeMin = mysql_real_escape_string($_POST['gradeMin']);
-        		$gradeMax = mysql_real_escape_string($_POST['gradeMax']);
-                $date = mysql_real_escape_string($_POST['date']);
-                $chckbx1 = mysql_real_escape_string($_POST['chckbx1']);
-                $chckbx2 = mysql_real_escape_string($_POST['chckbx2']);
+            if (isset($_POST['register']) && isset($_POST['nick']) && isset($_POST['start']) && isset($_POST['check1']) && isset($_POST['check2']) && isset($_POST['note'])) {
+        		$nick = mysql_real_escape_string($_POST['nick']);
+        		$start = mysql_real_escape_string($_POST['start']);
+                $check1 = mysql_real_escape_string($_POST['check1']);
+                $check2 = mysql_real_escape_string($_POST['check2']);
                 $note = mysql_real_escape_string($_POST['note']);
                 
-                $testQuery = mysql_query("SELECT 1 FROM session_of_".$id." LIMIT 1;");
+                $evaluate = mysql_query("SELECT 1 FROM `session_of_".$id."`");
                 
-                if (!$testQuery) {
-                    $newQuery = mysql_query("CREATE TABLE session_of_".$id." (
-                        'ID' INT(25) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        'gradeMin' INT(15) NOT NULL,
-                        'gradeMax' INT(15) NOT NULL,
-                        'date' DATE NOT NULL,
-                        'chckbx1' TINYINT(2) NOT NULL,
-                        'chckbx2' TINYINT(2) NOT NULL,
-                        'note' VARCHAR(180) NOT NULL
-                    )");
+                if(!($evaluate !== FALSE)) {
+                    $createTable = mysql_query("CREATE TABLE `session_of_".$id."` (
+                        `ID` INT(25) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        `Nick` VARCHAR(100) NOT NULL,
+                        `Start` DATE NOT NULL,
+                        `Deadlines` TINYINT(2) NOT NULL,
+                        `Sendin` TINYINT(2) NOT NULL,
+                        `Note` VARCHAR(180) NOT NULL
+                        )");
                 }
                 
-        		$registerQuery = mysql_query("INSERT INTO session_of_".$id." (gradeMin, gradeMax, date, chckbx1, chckbx2, note) VALUES ('".$gradeMin."', '".$gradeMax."', '".$date."', '".$chckbx1."', '".$chckbx2."', '".$note."')");
-
-        		if ($registerQuery) {
-        		    echo "<script> window.location.replace('/manager/editSession?success=create')</script>";
-        		} else {
-        		    echo "<script> window.location.replace('/manager/newSession?failure=create')</script>";
-        		}
+                $registerQuery = mysql_query("INSERT INTO `session_of_".$id."` (Nick, Start, Deadlines, Sendin, Note) VALUES ('".$nick."', '".$start."', '".$check1."', '".$check2."', '".$note."')");
+                
+                if ($registerQuery) {
+                    echo "<script> window.location.replace('/manager/continueWorking?id=".$id."&success')</script>";
+                } else {
+                    echo "<script> window.location.replace('/manager/newSession?id=".$id."&failure')</script>";
+                }
     		} else {
                 ?>
-            <form method="post" action="../manager/newSession" name="registerform" id="registerform">
-                <div class="form-control">
-                    <h2>Grade Range</h2>
-                    <p class="help-block">What grade level(s) do you want to be included?</p>
-                    <label class="col-sm-2 control-label">Minimum</label>
+            <?php echo "<form class='form-horizontal' method='post' action='/manager/newSession?id=".$id."' name='registerform' id='registerform'>"; ?>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Event Nickname</label>
                     <div class="col-sm-10">
-                       <select class="form-control" for="gradeMin" name="gradeMin">
-                            <option value="0">K</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                        </select>
-                    </div>
-                    <label class="col-sm-2 control-label">Maximum</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" for="gradeMax" name="gradeMax">
-                            <option value="0">K</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                        </select>
+                        <input type="text" placeholder="e.g. 'Fall 2014'" id="nick" name="nick">
                     </div>
                 </div>
-                <div class="form-control">
-                    <h2>Time &amp; Date settings</h2>
-                    <p class="help-block">
-                        These settings are needed for reminders, auto emailing, and timers.
-                        <strong>PLEASE NOTE: Deadlines are automatically assigned 2 weeks before start date.</strong>
-                    </p>
+                <div class="form-group">
                     <label class="col-sm-2 control-label">Start Date</label>
-                    <div class="col-sm-10"><input type="date" class="form-control" name="date" id="date"></div>
-                </div>
-                <div class="form-control">
-                    <h2>Basic Settings</h2>
-                    <p class="help-block">
-                        Write yourself a note, allow email sending, and teacher self-submission.
-                    </p>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="chckbx1" id="chckbx1" class="form-control">Allow teacher emailing
-                            <input type="checkbox" name="chckbx2" id="chckbx2" class="form-control">Allow submission sending
-                        </label>
+                    <div class="col-sm-10">
+                        <input type="date" placeholder="mm/dd/yyyy" id="start" name="start">
                     </div>
-                    <label class="col-sm-2 control-label">Leave a note (max. 180 Characters)</label>
-                    <div class="col-sm-10"><input type="text" name="note" id="note" class="form-control"></div>
                 </div>
-                <div class="form-control">
-                    <input type="submit" name="register" id="register" class="btn btn-primary" value="Submit" />
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Check where Applicable</label>
+                    <div class="col-sm-10">
+                        <input type="checkbox" value="1" id="check1" name="check1">Use deadlines
+                        <input type="checkbox" value="1" id="check2" name="check2">Allow send-ins
+                    </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Write yourself a note</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" rows="3" placeholder="No more than 180 characters please." onkeyup="textCounter(this,'counter',180);" name="note" id="note"></textarea>
+                    </div>
+                    <label class="col-sm-2 control-label">Characters Remaining: </label>
+                    <div class="col-sm-10">
+                    <input disabled maxlength="3" size="3" value="180" id="counter">
+                    </div>
+                    <script>
+                        function textCounter(field,field2,maxlimit) {
+                            var countfield = document.getElementById(field2);
+                            if ( field.value.length > maxlimit ) {
+                                field.value = field.value.substring( 0, maxlimit );
+                                return false;
+                            } else {
+                                countfield.value = maxlimit - field.value.length;
+                            }
+                        }
+                    </script>
+                </div>
+                <div class="form-group">
+            		    <input type="submit" name="register" id="register" class="btn btn-default" value="All done" />
+        		</div>
             </form>
             <?php } ?>
         </div>
+        <hr>
+            <footer>
+                <p>&copy; Copyright Brennan Macaig and Sant Bani School 2015. See <a href="/license.php">the license</a> for more info.</p>    
+            </footer>
         <?php
         } else {
                 echo "<meta http-equiv='refresh' content='/' />";
