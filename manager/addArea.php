@@ -1,12 +1,12 @@
 <?php
     /*
-      _____                 _         __  __                                   
+     _____                 _         __  __                                   
      | ____|_   _____ _ __ | |_ ___  |  \/  | __ _ _ __   __ _  __ _  ___ _ __ 
      |  _| \ \ / / _ \ '_ \| __/ __| | |\/| |/ _` | '_ \ / _` |/ _` |/ _ \ '__|
      | |___ \ V /  __/ | | | |_\__ \ | |  | | (_| | | | | (_| | (_| |  __/ |   
      |_____| \_/ \___|_| |_|\__|___/ |_|  |_|\__,_|_| |_|\__,_|\__, |\___|_|   
                                                           |___/           
-    newSession.php written by Brennan Macaig                                                      
+    addTeacher.php written by Brennan Macaig                                                      
     Copyright (C) 2015 Brennan Macaig and Sant Bani School
     Licensed under the MIT Open Source License
     
@@ -25,7 +25,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- OTHER TAGS -->
 
-        <title>New Session | Events Manager</title>
+        <title>Add Area | Events Manager</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/loginstyle.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> 
@@ -59,83 +59,72 @@
             </div>
         </nav>
         <div class="jumbotron">
-            <?php
-                if ($_GET['failure']) {
-                    echo "<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-                        <p><strong>Time to try again.</strong> It looks like you might have left a few fields that you needed to fill in blank, or maybe I couldn't connect you to the database. At any rate, want to try this again?</p></div>";
-                }
-                
-                $id = ($_GET['id']);
-            ?>
             <div class="container">
-                <h1>Create a new Session</h1>
-                <p>You've got your students, you've got your teachers, and you have an event all ready to go. Now lets create a new session for it! This "wizard" will show you how to do everything from here on out.</p>
+                <h1>Add Area</h1>
+                <p><strong>Add an Area.</strong> This is where you can add an area for all events to use! You can add a room, the playing field, playground, busses, anything!</p>
             </div>
         </div>
-        <div class="container">
-            
-            <h1>Step 1: Basic Details</h1>
-            <p>
-                Please fill in this information correclty and accurately. You CANNOT change this information without starting over.
-            </p>
-            <?php
-            if (isset($_POST['register']) && isset($_POST['nick']) && isset($_POST['start']) && isset($_POST['check1']) && isset($_POST['check2']) && isset($_POST['note'])) {
-        		$nick = mysql_real_escape_string($_POST['nick']);
-        		$start = mysql_real_escape_string($_POST['start']);
-                $check1 = mysql_real_escape_string($_POST['check1']);
-                $check2 = mysql_real_escape_string($_POST['check2']);
+           <?php
+    		if (isset($_POST['rName']) && isset($_POST['capacity']) && isset($_POST['note'])) {
+        		$rName = mysql_real_escape_string($_POST['rName']);
+        		$capacity = mysql_real_escape_string($_POST['capacity']);
                 $note = mysql_real_escape_string($_POST['note']);
-                
-                $evaluate = mysql_query("SELECT 1 FROM `session_of_".$id."`");
-                
-                if(!($evaluate !== FALSE)) {
-                    $createTable = mysql_query("CREATE TABLE `session_of_".$id."` (
-                        `ID` INT(25) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        `Nick` VARCHAR(100) NOT NULL,
-                        `Start` DATE NOT NULL,
-                        `Deadlines` TINYINT(2) NOT NULL,
-                        `Sendin` TINYINT(2) NOT NULL,
-                        `Note` VARCHAR(180) NOT NULL
-                        )");
-                }
-                
-                $registerQuery = mysql_query("INSERT INTO `session_of_".$id."` (Nick, Start, Deadlines, Sendin, Note) VALUES ('".$nick."', '".$start."', '".$check1."', '".$check2."', '".$note."')");
-                
-                if ($registerQuery) {
-                    echo "<script> window.location.replace('/manager/continueWorking?id=".$id."&success')</script>";
-                } else {
-                    echo "<script> window.location.replace('/manager/newSession?id=".$id."&failure')</script>";
-                }
+
+        		$registerQuery = mysql_query("INSERT INTO rooms (Name, Capacity, Description) VALUES ('".$rName."', '".$capacity."', '".$note."')");
+
+        		if ($registerQuery) {
+        		    echo "<script> window.location.replace('../manager/index?success=addArea')</script>";
+        		} else {
+        		    echo "<script> window.location.replace('../manager/index?failure=addArea')</script>";
+        		}
     		} else {
-                ?>
-            <?php echo "<form class='form-horizontal' method='post' action='/manager/newSession?id=".$id."' name='registerform' id='registerform'>"; ?>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Event Nickname</label>
+
+?>
+    	<!-- CONTENT CONTAINER -->
+    	<div class="container">
+    		<form method="post" action="/manager/addArea.php" name="registerform" id="registerform" class="form-horizontal">
+        		<div class="form-group">
+                    <label for="roomName" class="col-sm-2">Area Name:</label>
                     <div class="col-sm-10">
-                        <input type="text" placeholder="e.g. 'Fall 2014'" id="nick" name="nick">
+                        <input type="text" name="rName" id="rName">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Start Date</label>
+                    <label class="col-sm-2">Capacity: </label>
                     <div class="col-sm-10">
-                        <input type="date" placeholder="mm/dd/yyyy" id="start" name="start">
+                        <select class="form-control" name="capacity">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="0">20+</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Check where Applicable</label>
-                    <div class="col-sm-10">
-                        <input type="checkbox" value="1" id="check1" name="check1">Use deadlines
-                        <input type="checkbox" value="1" id="check2" name="check2">Allow send-ins
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Write yourself a note</label>
+                    <label class="col-sm-2 control-label">Brief Description</label>
                     <div class="col-sm-10">
                         <textarea class="form-control" rows="3" placeholder="No more than 180 characters please." onkeyup="textCounter(this,'counter',180);" name="note" id="note"></textarea>
                     </div>
                     <label class="col-sm-2 control-label">Characters Remaining: </label>
                     <div class="col-sm-10">
-                    <input disabled maxlength="3" size="3" value="180" id="counter">
+                        <input disabled maxlength="3" size="3" value="180" id="counter">
                     </div>
                     <script>
                         function textCounter(field,field2,maxlimit) {
@@ -150,20 +139,22 @@
                     </script>
                 </div>
                 <div class="form-group">
-            		    <input type="submit" name="register" id="register" class="btn btn-default" value="All done" />
+            		    <input type="submit" name="register" id="register" class="btn btn-default" value="Submit" />
         		</div>
-            </form>
-            <?php } ?>
-        </div>
-        <hr>
+    		</form>
+    	</div>
+	<?php } ?>
+            <hr>
             <footer>
                 <p>&copy; Copyright Brennan Macaig and Sant Bani School 2015. See <a href="/license.php">the license</a> for more info.</p>    
             </footer>
-        <?php
-        } else {
+        </div>
+    <?php
+            } else {
                 echo "<meta http-equiv='refresh' content='/' />";
                 echo "<script> window.location.replace('/')</script>";
                 // Whoops! Not logged in.
-            }?>
+            }
+    ?>
     </body>
 </html>

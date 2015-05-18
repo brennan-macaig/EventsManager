@@ -65,11 +65,13 @@
             </div>
         </div>
            <?php
-    		if (isset($_POST['register']) && isset($_POST['name_ex']) && isset($_POST['blocks'])) {
+    		if (isset($_POST['register']) && isset($_POST['name_ex']) && isset($_POST['blocks']) && isset($_POST['min']) && isset($_POST['max'])) {
         		$name = mysql_real_escape_string($_POST['name_ex']);
         		$blocks = mysql_real_escape_string($_POST['blocks']);
-
-        		$registerQuery = mysql_query("INSERT INTO events (Name, Blocks) VALUES ('".$name."', '".$blocks."')");
+                $min = mysql_real_escape_string($_POST['min']);
+                $max = mysql_real_escape_string($_POST['max']);
+                
+        		$registerQuery = mysql_query("INSERT INTO events (Name, Blocks, GradeMin, GradeMax) VALUES ('".$name."', '".$blocks."', '".$min."', '".$max."')");
                 
         		if ($registerQuery) {
         		    echo "<script> window.location.replace('/manager/index?success=addEvent')</script>";
@@ -81,14 +83,14 @@
 ?>
     	<!-- CONTENT CONTAINER -->
     	<div class="container">
-    		<form method="post" action="/manager/addEvent.php" name="registerform" id="registerform">
+    		<form method="post" action="/manager/addEvent.php" name="registerform" id="registerform" class="form-horizontal">
         		<div class="form-group">
-        		    <label for="name">Event Name</label>
-            		    <input type="text" class="form-controll" id="name_ex"  name= "name_ex" placeholder="e.g. artblocks">
+        		    <label for="name" class="col-sm-2">Event Name</label>
+                    <div class="col-sm-10"><input type="text" class="form-controll" id="name_ex"  name= "name_ex" placeholder="e.g. artblocks"></div>
         		</div>
         	        <div class="form-group" name="blocks" id="blocks">
-        	        <label for="names">Blocks</label>
-        		    <select class="form-control" for="blocks" name="blocks" >
+        	        <label for="names" class="col-sm-2">Blocks</label>
+        		    <div class="col-sm-10"><select class="form-control" for="blocks" name="blocks" >
                 	    <option value="1">1</option>
                		    <option value="2">2</option>
              		    <option value="3">3</option>
@@ -97,8 +99,48 @@
             		    <option value="6">6</option>
             		    <option value="7">7</option>
             		    <option value="8">8</option>
-            		    </select>
+                        </select></div>
         		</div>
+        		    <div class="form-group">
+        		        <label for="min" class="col-sm-2">Minimum Grade</label>
+        		        <div class="col-sm-10">
+        		            <select class="form-control" for="min" id="min" name="min">
+        		                <option value="0">K</option>
+        		                <option value="1">1</option>
+        		                <option value="2">2</option>
+        		                <option value="3">3</option>
+        		                <option value="4">4</option>
+        		                <option value="5">5</option>
+        		                <option value="6">6</option>
+        		                <option value="7">7</option>
+        		                <option value="8">8</option>
+        		                <option value="9">9</option>
+        		                <option value="10">10</option>
+        		                <option value="11">11</option>
+        		                <option value="12">12</option>
+        		            </select>
+        		        </div>
+        		    </div>
+        		    <div class="form-group">
+        		        <label class="col-sm-2">Maximum Grade</label>
+        		        <div clas="col-sm-10">
+                           <select class="form-control" for="max" id="max" name="max">
+        		                <option value="0">K</option>
+        		                <option value="1">1</option>
+        		                <option value="2">2</option>
+        		                <option value="3">3</option>
+        		                <option value="4">4</option>
+        		                <option value="5">5</option>
+        		                <option value="6">6</option>
+        		                <option value="7">7</option>
+        		                <option value="8">8</option>
+        		                <option value="9">9</option>
+        		                <option value="10">10</option>
+        		                <option value="11">11</option>
+        		                <option value="12">12</option>
+                            </select>
+        		        </div>
+        		    </div>
         		<div class="form-group">
             		    <input type="submit" name="register" id="register" class="btn btn-default" value="Submit" />
         		</div>

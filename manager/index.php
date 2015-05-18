@@ -105,6 +105,20 @@
                         <p><strong>Hip-hip... Hurrah!</strong> That student was removed from the database without a problem.</p>
                     </div>
                     <?php break;
+                case "delArea":
+                    ?>
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <p><strong>That's the spirit!</strong> You correctly removed an area from the database.</p>
+                    </div>
+                    <?php break;
+                case "addArea":
+                    ?>
+                     <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <p><strong>Yippie!</strong> We've added that area to the database properly.</p>
+                    </div>
+                    <?php break;
             }
             switch ($_GET['failure']) {
                 case "addEvent":
@@ -151,6 +165,22 @@
                          <p><strong>Do you want the bad news first?</strong> Sure you do. We couldn't add a student to the database. That's kind of sad, actually.</p>
                     </div>
                     <?php
+                case "addArea":
+                    ?>
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span arai-hidden="true">&times;</span></button>
+                         <p><strong>Uhh... about that...</strong> I can't add that area to our database of areas...</p>
+                    </div>
+                    <?php
+                break;
+                case "delArea":
+                    ?>
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span arai-hidden="true">&times;</span></button>
+                         <p><strong>Mmmhmm... I see....</strong> It doesn't look like you can delete that area yet... oh well...</p>
+                    </div>
+                    <?php
+                break;
             }
         ?>
             <div class="container">
@@ -166,18 +196,9 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="../manager/listTeacher">Teachers</a></li>
                                 <li><a href="../manager/listStudent">Students</a></li>
+                                <li><a href="../manager/listArea">Areas</a></li>
                             </ul>
                         </div>
-                       <div class="btn-group" role="group" aria-label="Print Dropdown">
-                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                            Print...
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Print Signups</a></li>
-                            <li><a href="#">Print Lists</a></li>
-                        </ul>
-                    </div>
                     <div class="btn-group" role="group" aria-label="Add Stuff">
                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             Add...
@@ -186,6 +207,7 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="../manager/addStudent">Student</a></li>
                             <li><a href="../manager/addTeacher">Teacher</a></li>
+                            <li><a href="../manager/addArea">Areas</a></li>
                         </ul>
                     </div>
                 </div>
