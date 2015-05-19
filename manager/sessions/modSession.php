@@ -71,6 +71,11 @@
                     <p><a class="btn btn-primary" href="#" role="button">Do this &rarr;</a></p>
                 </div>
                 <div class="col-md-4">
+                    <h2>Assignments</h2>
+                    <p>OK, you need to actually assign students to their choices. Now's your chance! Use this option to finish the assignments.</p>
+                    <p><a class="btn btn-primary" href="#" role="button">Do this &rarr;</a></p>
+                </div>
+                <div class="col-md-4">
                     <h2>Print Stuff</h2>
                     <p>It's that time - you need to print the sign-up sheets, or maybe you need to print the assigned topics. You can do that from here.</p>
                     <p><a class="btn btn-success" href="#" role="button">Do this &rarr;</a></p>
